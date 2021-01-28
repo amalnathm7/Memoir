@@ -6,13 +6,7 @@
 package memoir;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,7 +15,16 @@ import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 /**
  * FXML Controller class
  *
@@ -63,14 +66,26 @@ public class HomepageController implements Initializable {
     protected static GridPane gridTodo;
     @FXML
     protected static GridPane gridNote;
-
+    @FXML
+    private ImageView image;	  
+    @FXML
+    private Image image1;
+    @FXML
+    private ComboBox<String> combobox;
+    
+    ObservableList<String> list = FXCollections.observableArrayList("Strawberry", "Avacado","Orange","Apple","Pineapple","Coconut","Mango","Peach","None");
+    
     /**
      * Initializes the controller class.
+     * @param arg0
+     * @param arg1
      */
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //TODO
-    }
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		combobox.setItems(list);
+	}
 
     @FXML
     private void logout(javafx.event.ActionEvent event) throws IOException {
@@ -150,4 +165,52 @@ public class HomepageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+	    void changeImage(ActionEvent event) {
+		  if("Strawberry".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/strawberry.png");
+			  image.setImage(image1);
+		  }
+		  
+		  if("Avacado".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/avocado.png");
+			  image.setImage(image1);
+		  }
+		  
+		  if("Orange".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/Orange.png");
+			  image.setImage(image1);
+		  }
+		  
+		  if("Apple".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/Apple.png");
+			  image.setImage(image1);
+		  }
+		  
+		  if("None".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/clipart1458421.png");
+			  image.setImage(image1);
+		  }
+		  
+		  if("Pineapple".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/Pineapple.png");
+			  image.setImage(image1);
+		  }
+		  
+		  if("Coconut".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/Coconut.png");
+			  image.setImage(image1);
+		  }
+		  
+		  if("Mango".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/Mango.png");
+			  image.setImage(image1);
+		  }
+		  
+		  if("Peach".equals(combobox.getValue())) {
+			  image1 = new Image("memoir/Peaches.png");
+			  image.setImage(image1);
+		  }
+			  
+	    }
 }
