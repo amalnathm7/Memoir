@@ -14,12 +14,7 @@
 
 <AnchorPane fx:id="journalpane" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="memoir.TodonewController">
    <children>
-      <DatePicker fx:id="enddate" layoutX="297.0" layoutY="134.0" prefHeight="40.0" prefWidth="250.0" promptText="DEADLINE" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="135.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </DatePicker>
-      <DatePicker fx:id="startdate" layoutX="30.0" layoutY="134.0" prefHeight="40.0" prefWidth="250.0" promptText="START DATE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="135.0">
+      <DatePicker fx:id="enddate" layoutX="30.0" layoutY="134.0" prefHeight="40.0" prefWidth="250.0" promptText="DEADLINE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="135.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
