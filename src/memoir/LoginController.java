@@ -13,7 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -28,9 +30,7 @@ import javafx.stage.Stage;
  * @author amaln
  */
 public class LoginController implements Initializable {
-
-    @FXML
-    private TextField email;
+    
     @FXML
     private PasswordField password;
     @FXML
@@ -47,6 +47,11 @@ public class LoginController implements Initializable {
     private VBox vbox;
     @FXML
     private Label label;
+    @FXML
+    private TextField username;
+    
+    static User user;
+    static String auth;
     
     /**
      * Initializes the controller class.
@@ -55,12 +60,12 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
+        RestClient.check_server_time();
     }
 
     @FXML
     private void signUp(javafx.event.ActionEvent event) throws IOException {
-    
+        
         Parent parent = FXMLLoader.load(getClass().getResource("Signup.fxml"));
         
         signup.getScene().setRoot(parent);    
@@ -68,11 +73,24 @@ public class LoginController implements Initializable {
     
     @FXML
     private void logIn(javafx.event.ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+        try {
+            auth = RestClient.login(username.getText(), password.getText());
         
-        Scene scene = new Scene(parent, login.getScene().getWidth(), login.getScene().getHeight());
+            user = RestClient.me(auth);
+            
+            Parent parent = FXMLLoader.load(getClass().getResource("homepage.fxml"));
         
-        Stage stage = (Stage) login.getScene().getWindow();
-        stage.setScene(scene);
+            Scene scene = new Scene(parent, login.getScene().getWidth(), login.getScene().getHeight());
+        
+            Stage stage = (Stage) login.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
     }
 }

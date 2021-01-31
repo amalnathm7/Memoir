@@ -10,7 +10,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -36,8 +38,6 @@ public class TodonewController extends HomepageController implements Initializab
     @FXML
     private DatePicker enddate;
     @FXML
-    private DatePicker startdate;
-    @FXML
     private TextArea description;
     @FXML
     private TextField title;
@@ -56,16 +56,24 @@ public class TodonewController extends HomepageController implements Initializab
     
     @FXML
     private void saveBtn (javafx.event.ActionEvent event) throws IOException {
-        String titleStr = title.getText();
-        String descriptionStr = description.getText();
-        java.sql.Date stdateValue;
+        /*java.sql.Date stdateValue;
         java.sql.Date endateValue;
         if(startdate.getValue() != null)
             stdateValue = java.sql.Date.valueOf(startdate.getValue());
         if(enddate.getValue() != null)
-            endateValue = java.sql.Date.valueOf(enddate.getValue());
-        
-        Stage stage = (Stage) save.getScene().getWindow();
-        stage.close();
+            endateValue = java.sql.Date.valueOf(enddate.getValue());*/
+        try {
+            RestClient.create_todo(title.getText(), description.getText(), enddate.getValue().toString(), LoginController.auth);
+            
+            Stage stage = (Stage) save.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
     }
 }

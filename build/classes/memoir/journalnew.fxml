@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -14,11 +13,6 @@
 
 <AnchorPane fx:id="journalpane" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="memoir.JournalnewController">
    <children>
-      <DatePicker fx:id="date" layoutX="31.0" layoutY="140.0" prefHeight="40.0" prefWidth="250.0" promptText="DD/MM/YYYY" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="140.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </DatePicker>
       <HBox layoutX="504.0" layoutY="138.0" prefHeight="50.0" prefWidth="180.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="125.0">
          <children>
             <Button fx:id="attach" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent;" text="ADD IMG" textFill="BLUE">
@@ -104,5 +98,10 @@
             <Font name="Verdana Italic" size="48.0" />
          </font>
       </Label>
+      <TextField fx:id="emotion" layoutX="30.0" layoutY="134.0" prefHeight="40.0" prefWidth="704.0" promptText="How do you feel today?" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="135.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

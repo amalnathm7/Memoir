@@ -20,6 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -71,11 +74,24 @@ public class SignupController implements Initializable {
     
     @FXML
     private void signUp(javafx.event.ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+        try {
+            RestClient.create_user(email.getText(), username.getText(), password.getText(), password.getText());
         
-        Scene scene = new Scene(parent, signup.getScene().getWidth(), signup.getScene().getHeight());
+            RestClient.login(username.getText(), password.getText());
         
-        Stage stage = (Stage) signup.getScene().getWindow();
-        stage.setScene(scene);
+            Parent parent = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+        
+            Scene scene = new Scene(parent, signup.getScene().getWidth(), signup.getScene().getHeight());
+        
+            Stage stage = (Stage) signup.getScene().getWindow();
+            stage.setScene(scene);
+        } catch(Exception e) {
+            Alert alert = new Alert(AlertType.ERROR, "", ButtonType.OK);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
     }
 }

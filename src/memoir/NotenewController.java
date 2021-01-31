@@ -8,12 +8,11 @@ package memoir;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -44,41 +43,29 @@ public class NotenewController extends HomepageController implements Initializab
     @FXML
     private Label label;
     @FXML
-    private ComboBox<String> combo;
-    
-    ObservableList<String> list = FXCollections.observableArrayList("Add new category...");
-    
-    @FXML
-    private Button addCategory;
-    @FXML
-    private TextField newCombo;
+    private TextField category;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        combo.setItems(list);
     }
     
     @FXML
     private void saveBtn (javafx.event.ActionEvent event) throws IOException {
-        String titleStr = title.getText();
-        String descriptionStr = description.getText();
-        String category = combo.getPromptText();
-        
-        Stage stage = (Stage) save.getScene().getWindow();
-        stage.close();
-    }
-    
-    @FXML
-    private void addCombo (javafx.event.ActionEvent event)
-    {
-        if(!newCombo.getText().isEmpty()){
-            list.remove("Add new category...");
-            list.add(newCombo.getText());
-            combo.setItems(list);
+        try {
+            RestClient.create_journal(title.getText(), description.getText(), category.getText(), null, "d", LoginController.auth);
+            
+            Stage stage = (Stage) save.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
         }
     }
-
 }

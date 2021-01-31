@@ -10,8 +10,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -34,8 +35,6 @@ public class JournalnewController extends HomepageController implements Initiali
     @FXML
     private Button delete;
     @FXML
-    private DatePicker date;
-    @FXML
     private TextArea description;
     @FXML
     private TextField title;
@@ -43,6 +42,8 @@ public class JournalnewController extends HomepageController implements Initiali
     private Button save;
     @FXML
     private Label label;
+    @FXML
+    private TextField emotion;
 
     /**
      * Initializes the controller class.
@@ -54,12 +55,19 @@ public class JournalnewController extends HomepageController implements Initiali
     
     @FXML
     private void saveBtn (javafx.event.ActionEvent event) throws IOException {
-        String titleStr = title.getText();
-        String descriptionStr = description.getText();
-        java.sql.Date dateValue;
-        if(date.getValue() != null)
-            dateValue = java.sql.Date.valueOf(date.getValue());
-        Stage stage = (Stage) save.getScene().getWindow();
-        stage.close();
+        
+        try {
+            RestClient.create_journal(title.getText(), description.getText(), emotion.getText(), null, "j", LoginController.auth);
+            
+            Stage stage = (Stage) save.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
     }
 }
