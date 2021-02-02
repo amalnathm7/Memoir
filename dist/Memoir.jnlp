@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Memoir.jar" size="7005763" download="eager" />
+    <jar href="Memoir.jar" size="4435333" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="memoir.Memoir"  name="Memoir" />
   <update check="always"/>

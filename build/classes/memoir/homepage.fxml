@@ -151,14 +151,14 @@
       </AnchorPane>
       <AnchorPane fx:id="todopane" layoutX="300.0" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #6660a4;" styleClass="bodybg" stylesheets="@diarybg.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="addTodoBtn" contentDisplay="TOP" layoutX="286.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTodo" prefHeight="44.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <Button fx:id="addTodoBtn" contentDisplay="TOP" layoutX="286.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTodo" prefHeight="44.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="44.0" pickOnBounds="true">
                      <image>
-                        <Image url="@editBW.png" />
+                        <Image url="@add.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -166,68 +166,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="refreshTodo" contentDisplay="TOP" layoutX="350.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshTodo" prefHeight="44.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="44.0" fitWidth="44.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@refresh.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <ListView fx:id="todolist" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+            <ListView fx:id="todolist" fixedCellSize="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" styleClass="list-cell" stylesheets="@listcell.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
          </children></AnchorPane>
-      <AnchorPane fx:id="journalpane" layoutX="300.0" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #ab4545;" styleClass="bodybg" stylesheets="@journalbg.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Button fx:id="addJournalBtn" contentDisplay="TOP" layoutX="286.0" layoutY="14.0" mnemonicParsing="false" onAction="#addJournal" prefHeight="44.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="44.0" fitWidth="44.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@editBW.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="refreshJournal" contentDisplay="TOP" layoutX="350.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshJournal" prefHeight="44.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="44.0" fitWidth="44.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@refresh.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <ListView fx:id="journallist" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="notepane" layoutX="300.0" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #70b268;" styleClass="bodybg" stylesheets="@notesbg.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="addNoteBtn" contentDisplay="TOP" layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNote" prefHeight="53.0" prefWidth="64.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <Button fx:id="addNoteBtn" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNote" prefHeight="53.0" prefWidth="64.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="44.0" pickOnBounds="true">
                      <image>
-                        <Image url="@editBW.png" />
+                        <Image url="@add.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -235,14 +185,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="refreshNote" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshNote" prefHeight="44.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <ListView fx:id="notelist" fixedCellSize="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" styleClass="list-cell" stylesheets="@listcell.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="journalpane" layoutX="300.0" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #ab4545;" styleClass="bodybg" stylesheets="@journalbg.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="addJournalBtn" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addJournal" prefHeight="44.0" prefWidth="44.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="44.0" pickOnBounds="true">
                      <image>
-                        <Image url="@refresh.png" />
+                        <Image url="@add.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -250,22 +205,26 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <ListView fx:id="notelist" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+            <ListView fx:id="journallist" fixedCellSize="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" styleClass="list-cell" stylesheets="@listcell.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="homepane" layoutX="300.0" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #a44343;" styleClass="bodybg" stylesheets="@stylesheet2.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
-               <image>
-                  <Image url="@clipart1458421.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="username" alignment="CENTER" layoutX="319.0" layoutY="401.0" prefHeight="38.0" prefWidth="208.0" text="Username" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="401.0">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="combobox" layoutX="269.0" layoutY="352.0" onAction="#changeImage" prefHeight="39.0" prefWidth="208.0" promptText="Choose picture" style="-fx-background-color: #ffffff;" AnchorPane.rightAnchor="222.0" />
+            <VBox alignment="CENTER" layoutX="270.0" layoutY="230.0" prefHeight="240.0" prefWidth="160.0" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="230.0">
+               <children>
+                  <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@clipart1458421.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="username" alignment="CENTER" prefHeight="38.0" prefWidth="208.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="combobox" onAction="#changeImage" prefHeight="39.0" prefWidth="208.0" promptText="Choose picture" style="-fx-background-color: #ffffff;" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>
