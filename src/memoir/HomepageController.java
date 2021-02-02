@@ -15,19 +15,22 @@ import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
  *
@@ -74,16 +77,14 @@ public class HomepageController implements Initializable {
     @FXML
     private ListView<String> journallist;
     @FXML
-    private Button refreshTodo;
-    @FXML
-    private Button refreshJournal;
-    @FXML
-    private Button refreshNote;
-    @FXML
     private Label username;
     
     ObservableList<String> list = FXCollections.observableArrayList("Strawberry", "Avacado","Orange","Apple","Pineapple","Coconut","Mango","Peach","None");
     Image image1;
+    static int index = -1;
+    static ArrayList<Journal> journalList;
+    static ArrayList<Journal> noteList;
+    static ArrayList<Todo> todoList;
     
     /**
      * Initializes the controller class.
@@ -93,13 +94,93 @@ public class HomepageController implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		combobox.setItems(list);
+                // TODO Auto-generated method stub    
+                
+                combobox.setItems(list);
                 username.setText(LoginController.user.username);
+
+                refreshJ();
+                refreshN();
+                refreshT();
+
+                journallist.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                    public void handle(MouseEvent event) {
+                        if(event.getClickCount() == 2) {
+                            try {
+                                index = journallist.getSelectionModel().getSelectedIndex();
+                                
+                                Parent parent = FXMLLoader.load(getClass().getResource("journalnew.fxml"));
+                                
+                                Scene scene = new Scene(parent);
+                                
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.showAndWait();
+                                refreshJ();
+                                index = -1;
+                                
+                            } catch (IOException ex) {
+                                Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                });
+                
+                todolist.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                    public void handle(MouseEvent event) {
+                        if(event.getClickCount() == 2) {
+                            try {
+                                index = todolist.getSelectionModel().getSelectedIndex();
+                                
+                                Parent parent = FXMLLoader.load(getClass().getResource("todonew.fxml"));
+                                
+                                Scene scene = new Scene(parent);
+                                
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.showAndWait();
+                                refreshT();
+                                index = -1;
+                                
+                            } catch (IOException ex) {
+                                Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                });
+                
+                notelist.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                    public void handle(MouseEvent event) {
+                        if(event.getClickCount() == 2) {
+                            try {
+                                index = notelist.getSelectionModel().getSelectedIndex();
+                                
+                                Parent parent = FXMLLoader.load(getClass().getResource("notenew.fxml"));
+                                
+                                Scene scene = new Scene(parent);
+                                
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.showAndWait();
+                                refreshN();
+                                index = -1;
+                                
+                            } catch (IOException ex) {
+                                Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                });
 	}
 
     @FXML
     private void logout(javafx.event.ActionEvent event) throws IOException {
+        LoginController.auth = null;
+        LoginController.user = null;
+        
         Parent parent = FXMLLoader.load(getClass().getResource("login.fxml"));
         
         Scene scene = new Scene(parent, logout.getScene().getWidth(), logout.getScene().getHeight());
@@ -145,113 +226,50 @@ public class HomepageController implements Initializable {
     }
     
     @FXML
-        void changeImage(ActionEvent event) {
-            if("Strawberry".equals(combobox.getValue())) {
-                image1 = new Image("memoir/strawberry.png");
-		image.setImage(image1);
-            }
+    void changeImage(ActionEvent event) {
+        if("Strawberry".equals(combobox.getValue())) {
+            image1 = new Image("memoir/strawberry.png");
+            image.setImage(image1);
+        }
 	  
-	    if("Avacado".equals(combobox.getValue())) {
-		image1 = new Image("memoir/avocado.png");
-		image.setImage(image1);
-            }
-            
-            if("Orange".equals(combobox.getValue())) {
-                image1 = new Image("memoir/Orange.png");
-		image.setImage(image1);
-            }
-            
-            if("Apple".equals(combobox.getValue())) {
-                image1 = new Image("memoir/Apple.png");
-		image.setImage(image1);
-            }
-		  
-            if("None".equals(combobox.getValue())) {
-                image1 = new Image("memoir/clipart1458421.png");
-		image.setImage(image1);
-            }
-		  
-            if("Pineapple".equals(combobox.getValue())) {
-                image1 = new Image("memoir/Pineapple.png");
-		image.setImage(image1);
-            }
-		  
-            if("Coconut".equals(combobox.getValue())) {
-                image1 = new Image("memoir/Coconut.png");
-		image.setImage(image1);
-            }
-		  
-            if("Mango".equals(combobox.getValue())) {
-                image1 = new Image("memoir/Mango.png");
-		image.setImage(image1);
-            }
-		  
-            if("Peach".equals(combobox.getValue())) {
-                image1 = new Image("memoir/Peaches.png");
-                image.setImage(image1);
-            }
-    }
-
-    @FXML
-    private void refreshTodo(ActionEvent event) throws IOException {
-        try {
-            ArrayList<Todo> arrayList = RestClient.get_all_todo(LoginController.auth);
-            ArrayList<String> newList = new ArrayList<>();
-            int i = 0;
-            while(i < arrayList.size()) {
-                newList.add(i, arrayList.get(i).title+" : "+arrayList.get(i).description);
-                i++;
-            }
-            todolist.setItems(FXCollections.observableArrayList(newList));
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "No to-do's found!", ButtonType.OK);
-            alert.showAndWait();
-
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
+	if("Avacado".equals(combobox.getValue())) {
+            image1 = new Image("memoir/avocado.png");
+            image.setImage(image1);
         }
-    }
-
-    @FXML
-    private void refreshJournal(ActionEvent event) {
-        try {
-            ArrayList<Journal> arrayList = RestClient.get_categorized_list("j",LoginController.auth);
-            ArrayList<String> newList = new ArrayList<>();
-            int i = 0;
-            while(i < arrayList.size()) {
-                newList.add(i, arrayList.get(i).title+" : "+arrayList.get(i).description);
-                i++;
-            }
-            journallist.setItems(FXCollections.observableArrayList(newList));
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "No journals found!", ButtonType.OK);
-            alert.showAndWait();
-
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
+            
+        if("Orange".equals(combobox.getValue())) {
+            image1 = new Image("memoir/Orange.png");
+            image.setImage(image1);
         }
-    }
-
-    @FXML
-    private void refreshNote(ActionEvent event) {
-        try {
-            ArrayList<Journal> arrayList = RestClient.get_categorized_list("d", LoginController.auth);
-            ArrayList<String> newList = new ArrayList<>();
-            int i = 0;
-            while(i < arrayList.size()) {
-                newList.add(i, arrayList.get(i).title+" : "+arrayList.get(i).description);
-                i++;
-            }
-            notelist.setItems(FXCollections.observableArrayList(newList));
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "No notes found!", ButtonType.OK);
-            alert.showAndWait();
-
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
+            
+        if("Apple".equals(combobox.getValue())) {
+            image1 = new Image("memoir/Apple.png");
+            image.setImage(image1);
+        }
+		  
+        if("None".equals(combobox.getValue())) {
+            image1 = new Image("memoir/clipart1458421.png");
+            image.setImage(image1);
+        }
+		  
+        if("Pineapple".equals(combobox.getValue())) {
+            image1 = new Image("memoir/Pineapple.png");
+            image.setImage(image1);
+        }
+		  
+        if("Coconut".equals(combobox.getValue())) {
+            image1 = new Image("memoir/Coconut.png");
+            image.setImage(image1);
+        }
+		  
+        if("Mango".equals(combobox.getValue())) {
+            image1 = new Image("memoir/Mango.png");
+            image.setImage(image1);
+        }
+		  
+        if("Peach".equals(combobox.getValue())) {
+            image1 = new Image("memoir/Peaches.png");
+            image.setImage(image1);
         }
     }
 
@@ -263,7 +281,9 @@ public class HomepageController implements Initializable {
         
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
+        refreshT();
+        index = -1;
     }
 
     @FXML
@@ -274,7 +294,9 @@ public class HomepageController implements Initializable {
         
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
+        refreshJ();
+        index = -1;
     }
 
     @FXML
@@ -284,7 +306,56 @@ public class HomepageController implements Initializable {
         Scene scene = new Scene(parent);
         
         Stage stage = new Stage();
+        stage.setOnCloseRequest(event1 -> {
+            
+        });
         stage.setScene(scene);
-        stage.show();
+        stage.showAndWait();
+        refreshN();
+        index = -1;
+    }
+    
+    void refreshJ(){
+        ArrayList<String> newList = new ArrayList<>();
+        int i = 0;
+        
+        journalList = RestClient.get_categorized_list("j",LoginController.auth);
+        
+        while(i < journalList.size()) {
+            newList.add(i, journalList.get(i).title+" : "+journalList.get(i).description);
+            i++;
+        }
+        
+        journallist.setItems(FXCollections.observableArrayList(newList));    
+    }
+    
+    void refreshN(){
+        ArrayList<String> newList = new ArrayList<>();
+        int i = 0;
+        
+        noteList = RestClient.get_categorized_list("d", LoginController.auth);
+        
+        while(i < noteList.size()) {
+            newList.add(i, noteList.get(i).emotion+" - "+noteList.get(i).title+" : "+noteList.get(i).description);
+            i++;
+        }
+        
+        notelist.setItems(FXCollections.observableArrayList(newList));
+    }
+    
+    void refreshT(){
+        ArrayList<String> newList = new ArrayList<>();
+        int i = 0;
+                
+        todoList = RestClient.get_all_todo(LoginController.auth);
+        
+        while(i < todoList.size()) {
+            String[] seq = todoList.get(i).end_date.split(" "); 
+            LocalDate date = LocalDate.parse(seq[0]);
+            newList.add(i, date.getDayOfMonth()+" "+date.getMonth()+" - "+todoList.get(i).title+" : "+todoList.get(i).description);
+            i++;
+        }
+        
+        todolist.setItems(FXCollections.observableArrayList(newList));
     }
 }

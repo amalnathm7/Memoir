@@ -8,6 +8,7 @@ package memoir;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -44,28 +45,84 @@ public class JournalnewController extends HomepageController implements Initiali
     private Label label;
     @FXML
     private TextField emotion;
+    
+    Journal journal;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            if(index != -1) {
+                journal = journalList.get(index);
+            
+                label.setText(journal.title);
+                title.setText(journal.title);
+                description.setText(journal.description);
+                emotion.setText(journal.emotion);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+            index = -1;
+        }
     }    
     
     @FXML
     private void saveBtn (javafx.event.ActionEvent event) throws IOException {
-        
         try {
-            RestClient.create_journal(title.getText(), description.getText(), emotion.getText(), null, "j", LoginController.auth);
-            
+            if(index == -1)
+                RestClient.create_journal(title.getText(), description.getText(), emotion.getText(), null, "j", LoginController.auth);
+            else{
+                journal.title = title.getText();
+                journal.description = description.getText();
+                journal.emotion = emotion.getText();
+                
+                RestClient.put_journal(journal, LoginController.auth);
+            }
             Stage stage = (Stage) save.getScene().getWindow();
             stage.close();
+            index = -1;
         } catch (Exception e) {
+            e.printStackTrace();
+            
             Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
             alert.showAndWait();
 
             if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+    }
+
+    @FXML
+    private void addImg(ActionEvent event) {
+    }
+
+    @FXML
+    private void redoBtn(ActionEvent event) {
+        label.setText("New Entry");
+        title.setText("");
+        description.setText("");
+        emotion.setText("");
+    }
+
+    @FXML
+    private void deleteBtn(ActionEvent event) {
+        if(index != -1){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete this note?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                RestClient.get_or_delete_journal(journal.id, "DELETE", LoginController.auth);
+                alert.close();
+                index = -1;
+                Stage stage = (Stage) delete.getScene().getWindow();
+                stage.close();
+            }
+            else {
                 alert.close();
             }
         }

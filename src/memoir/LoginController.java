@@ -68,23 +68,25 @@ public class LoginController implements Initializable {
         
         Parent parent = FXMLLoader.load(getClass().getResource("Signup.fxml"));
         
-        signup.getScene().setRoot(parent);    
+        signup.getScene().setRoot(parent);
     }
     
     @FXML
     private void logIn(javafx.event.ActionEvent event) throws IOException {
         try {
             auth = RestClient.login(username.getText(), password.getText());
-        
+            
             user = RestClient.me(auth);
             
             Parent parent = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-        
+            
             Scene scene = new Scene(parent, login.getScene().getWidth(), login.getScene().getHeight());
         
             Stage stage = (Stage) login.getScene().getWindow();
             stage.setScene(scene);
         } catch (Exception e) {
+            e.printStackTrace();
+            
             Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
             alert.showAndWait();
 

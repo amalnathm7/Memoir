@@ -5,8 +5,6 @@
  */
 package memoir;
 
-import java.awt.Event;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,8 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -59,11 +55,13 @@ public class SignupController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void logIn(javafx.event.ActionEvent event) throws IOException  {
@@ -77,15 +75,19 @@ public class SignupController implements Initializable {
         try {
             RestClient.create_user(email.getText(), username.getText(), password.getText(), password.getText());
         
-            RestClient.login(username.getText(), password.getText());
-        
+            LoginController.auth = RestClient.login(username.getText(), password.getText());
+
+            LoginController.user = RestClient.me(LoginController.auth);
+            
             Parent parent = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-        
+
             Scene scene = new Scene(parent, signup.getScene().getWidth(), signup.getScene().getHeight());
         
             Stage stage = (Stage) signup.getScene().getWindow();
             stage.setScene(scene);
         } catch(Exception e) {
+            e.printStackTrace();
+            
             Alert alert = new Alert(AlertType.ERROR, "", ButtonType.OK);
             alert.showAndWait();
 
